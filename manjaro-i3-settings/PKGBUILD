@@ -1,11 +1,11 @@
 
 _pkgbase=desktop-settings
 pkgname=manjaro-i3-settings
-pkgver=20200717
+pkgver=latest
 pkgrel=1
 arch=('any')
 url="https://github.com/manjaro/$_pkgbase"
-_branch=17.1.x
+_branch=master
 license=('GPL')
 pkgdesc='Manjaro Linux i3 settings'
 groups=('i3-manjaro')
