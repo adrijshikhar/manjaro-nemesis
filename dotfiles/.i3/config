@@ -39,7 +39,7 @@ bindsym $mod+Return exec tilix
 bindsym $mod+Shift+q kill
 
 # start program launcher
-bindsym $mod+d exec env LC_ALL=en_US.UTF-8 dmenu_run
+bindsym $mod+d exec env LC_ALL=en_US.UTF-8 dmenu_run -nb '#000000'
 
 bindsym $mod+Shift+d exec env LC_ALL=en_US.UTF-8 dmenu_recency
 
@@ -72,13 +72,18 @@ bindsym XF86AudioPrev exec playerctl previous
 
 # Start Applications
 bindsym $mod+Ctrl+b exec tilix -e 'bmenu'
+bindsym $mod+F1 exec evolution
 bindsym $mod+F2 exec google-chrome-stable
-bindsym $mod+F3 exec pcmanfm
+bindsym $mod+F3 exec dolphin
 # bindsym $mod+F3 exec ranger
-bindsym $mod+Shift+F3 exec pcmanfm_pkexec
-bindsym $mod+F5 exec tilix -e 'mocp'
-bindsym $mod+t exec --no-startup-id pkill compton
-bindsym $mod+Ctrl+t exec --no-startup-id compton -&
+# bindsym $mod+Shift+F3 exec pcmanfm_pkexec
+bindsym $mod+F4 exec slack
+bindsym $mod+F5 exec spotify
+bindsym $mod+F6 exec discord
+bindsym $mod+F7 exec teams
+# bindsym $mod+F5 exec tilix -e 'mocp'
+bindsym $mod+t exec --no-startup-id "pkill compton;  notify-send 'compton killed'"
+bindsym $mod+Ctrl+t exec --no-startup-id "compton; notify-send 'compton started'"
 bindsym $mod+Shift+p --release exec "killall dunst; exec notify-send 'restart dunst'"
 bindsym Print exec --no-startup-id i3-scrot
 bindsym $mod+Print --release exec --no-startup-id i3-scrot -w
@@ -121,7 +126,7 @@ bindsym $mod+Shift+b move container to workspace back_and_forth; workspace back_
 # split orientation
 bindsym $mod+h split h;exec notify-send 'tile horizontally'
 bindsym $mod+v split v;exec notify-send 'tile vertically'
-bindsym $mod+q split toggle
+bindsym $mod+q split toggle;exec notify-send 'tile toggle'
 
 # toggle fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
@@ -159,7 +164,7 @@ bindsym $mod+Ctrl+Left workspace prev
 # to display names or symbols instead of plain workspace numbers you can use
 # something like: set $ws1 1:mail
 #                 set $ws2 2:
-set $ws1 "1 Terminals "
+set $ws1 "1 Terminals >_"
 set $ws2 "2 Browsers "
 set $ws3 "3 Editors "
 set $ws4 "4 Explorers "
@@ -199,6 +204,8 @@ bindsym $mod+Shift+7 move container to workspace $ws7; workspace $ws7
 bindsym $mod+Shift+8 move container to workspace $ws8; workspace $ws8
 
 # Open applications on specific workspaces
+#  xprop | grep "CLASS"
+
 assign [class="X-terminal-emulator"] $ws1
 assign [class="Tilix"] $ws1
 assign [class="URxvt"] $ws1
@@ -210,9 +217,11 @@ assign [class="Gedit"] $ws3
 assign [class="Code"] $ws3
 assign [class="Subl3"] $ws3
 assign [class="Pcmanfm"] $ws4
+assign [class="dolphin"] $ws4
 assign [class="pcmanfm_pkexec"] $ws4
 assign [class="vlc"] $ws5
-assign [class="^spotify$"] $ws5
+assign [class="Spotify Free"] $ws5
+assign [class="Evolution"] $ws6
 assign [class="Telegram"] $ws6
 assign [class="Slack"] $ws6
 assign [class="discord"] $ws6
@@ -224,6 +233,8 @@ assign [class="^whatsapp$"] $ws6
 for_window [class=".*"] border pixel 0
 
 # Open specific applications in floating mode
+for_window [title="gesture-manager"] floating enable
+for_window [title="stopwatch"] floating enable
 for_window [title="alsamixer"] floating enable border pixel 1
 for_window [class="calamares"] floating enable border normal
 for_window [class="Clipgrab"] floating enable
@@ -248,14 +259,16 @@ for_window [class="qt5ct"] floating enable sticky enable border normal
 for_window [class="Qtconfig-qt4"] floating enable sticky enable border normal
 for_window [class="Simple-scan"] floating enable border normal
 for_window [class="(?i)System-config-printer.py"] floating enable border normal
+for_window [title="TeamViewer"] floating enable
 for_window [class="Skype"] floating enable border normal
 for_window [class="Timeset-gui"] floating enable border normal
 for_window [class="(?i)virtualbox"] floating enable border normal
 for_window [class="Xfburn"] floating enable
-for_window [class="zoom"] floating enable
+for_window [class="zoom"] floating enable border normal
 for_window [class="Gpick"] floating enable
 for_window [title="blueman"] floating enable
 for_window [title="blueman-manager"] floating enable
+for_window [class="kdeconnect.app"] floating enable
 
 # switch to workspace with urgent window automatically
 for_window [urgent=latest] focus
@@ -404,7 +417,7 @@ bindsym $mod+m bar mode toggle
   client.focused          #001C47 #001C47 #ffffff #FDF6E3
   client.focused_inactive #071327 #071327 #ffffff #454948
   client.unfocused        #00000F #00000F #ffffff #454948
-  client.urgent           #CB4B16 #FDF6E3 #1ABC9C #268BD2
+  client.urgent           #268BD2 #268BD2 #001C47 #268BD2
   client.placeholder      #000000 #0c0c0c #ffffff #000000 
 
   client.background       #2B2C2B
