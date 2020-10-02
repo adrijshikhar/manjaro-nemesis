@@ -41,10 +41,8 @@ then
 else
     if [ $1 == "upload" ]
     then
-        # cd $PWD
-        pwd
         git add .
         git commit -m "$(date)"
-        git push
+        git push origin master
     fi
 fi
