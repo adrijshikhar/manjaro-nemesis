@@ -4,7 +4,7 @@ backup_dir="$PWD/dotfiles"
 
 config_folder="$HOME/.config"
 
-declare -a HOME_FILES=(".i3" ".Xresources" ".xinitrc")
+declare -a HOME_FILES=(".i3" ".Xresources" ".xinitrc" "ssh-add.sh")
 declare -a CONFIG_FILES=("i3status" "dunst" "compton.conf" )
 
 
