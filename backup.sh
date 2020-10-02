@@ -23,8 +23,7 @@ echo "Copying files in home dir"
 
 for f in "${HOME_FILES[@]}"
 do
-    cd ~
-    rsync -a --info=progress2 $f $backup_dir
+    rsync -a --info=progress2 "$HOME/$f" $backup_dir
 done
 
 
@@ -32,7 +31,6 @@ echo "Copying files in .config dir"
 
 for f in "${CONFIG_FILES[@]}"
 do
-    cd ~
     rsync -a --info=progress2 "$config_folder/$f" "$backup_dir/.config"
 done
 
@@ -43,6 +41,8 @@ then
 else
     if [ $1 == "upload" ]
     then
+        cd $PWD
+        pwd
         git add .
         git commit -m "$(date)"
         git push

@@ -51,18 +51,24 @@ exec --no-startup-id /usr/lib/geoclue-2.0/demos/agent
 #exec --no-startup-id redshift-gtk
 
 ################################################################################################
+## ssh-add script                                                                             ##
+################################################################################################
+exec --no-startup-id exec ~/ssh-add.sh
+
+
+################################################################################################
 ## sound-section - DO NOT EDIT if you wish to automatically upgrade Alsa -> Pulseaudio later! ##
 ################################################################################################
 
 exec --no-startup-id volumeicon
-bindsym $mod+Ctrl+m exec terminal -e 'alsamixer'
+#bindsym $mod+Ctrl+m exec terminal -e 'alsamixer'
 #Player controls (install playerctl)
 bindsym XF86AudioPlay exec playerctl play-pause
 bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
 #exec --no-startup-id pulseaudio
 #exec --no-startup-id pa-applet
-#bindsym $mod+Ctrl+m exec pavucontrol
+bindsym $mod+Ctrl+m exec pavucontrol
 
 ################################################################################################
 
@@ -235,6 +241,7 @@ for_window [class=".*"] border pixel 0
 # Open specific applications in floating mode
 for_window [title="gesture-manager"] floating enable
 for_window [title="stopwatch"] floating enable
+for_window [class="Microsoft Teams - Preview"] floating enable
 for_window [title="alsamixer"] floating enable border pixel 1
 for_window [class="calamares"] floating enable border normal
 for_window [class="Clipgrab"] floating enable
