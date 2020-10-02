@@ -50,7 +50,7 @@
     
     # Split notifications into multiple lines if they don't fit into
     # geometry.
-    word_wrap = no
+    word_wrap = yes
     
     # Ignore newlines '\n' in notifications.
     ignore_newline = no
@@ -154,7 +154,7 @@
     icon_path = /usr/share/icons/Papirus-Dark/16x16/devices/:/usr/share/icons/Papirus-Dark/16x16/actions/:/usr/share/icons/Papirus-Dark/16x16/apps/:/usr/share/icons/Papirus-Dark/16x16/categories/:/usr/share/icons/Papirus-Dark/16x16/emblems/:/usr/share/icons/Papirus-Dark/16x16/emotes/:/usr/share/icons/Papirus-Dark/16x16/mimetypes/:/usr/share/icons/Papirus-Dark/16x16/panel/:/usr/share/icons/Papirus-Dark/16x16/places/:/usr/share/icons/Papirus-Dark/16x16/status/:/usr/share/icons/Papirus-Dark/symbolic/devices/:/usr/share/icons/Papirus-Dark/symbolic/actions/:/usr/share/icons/Papirus-Dark/symbolic/apps/:/usr/share/icons/Papirus-Dark/symbolic/categories/:/usr/share/icons/Papirus-Dark/symbolic/emblems/:/usr/share/icons/Papirus-Dark/symbolic/emotes/:/usr/share/icons/Papirus-Dark/symbolic/mimetypes/:/usr/share/icons/Papirus-Dark/symbolic/panel/:/usr/share/icons/Papirus-Dark/symbolic/places/:/usr/share/icons/Papirus-Dark/symbolic/status/
 
     # Limit icons size.
-    max_icon_size=128
+    max_icon_size=64
 
 [shortcuts]
 
