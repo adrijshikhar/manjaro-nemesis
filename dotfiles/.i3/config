@@ -4,11 +4,12 @@
 # Set mod key (Mod1=<Alt>, Mod4=<Super>)
 set $mod Mod4
 set $alt Mod1
+
 # set default desktop layout (default is tiling)
 # workspace_layout tabbed <stacking|tabbed>
 
 # Configure border style <normal|1pixel|pixel xx|none|pixel>
-default_border pixel 1  
+default_border pixel 1
 default_floating_border normal
 
 # Hide borders
@@ -26,14 +27,12 @@ bindsym $mod+n border normal
 font pango:Noto Sans, FontAwesome 10
 for_window [class=".*"] title_format "    <b>%title</b>"
 
+
 # Use Mouse+$mod to drag floating windows
 floating_modifier $mod
 
-# start tilix
-bindsym $mod+Return exec tilix
-
 # start a terminal
-# bindsym $mod+Shift+Return exec terminal
+bindsym $mod+Return exec tilix
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -41,31 +40,29 @@ bindsym $mod+Shift+q kill
 # start program launcher
 bindsym $mod+d exec env LC_ALL=en_US.UTF-8 dmenu_run -nb '#000000'
 
-bindsym $mod+Shift+d exec env LC_ALL=en_US.UTF-8 dmenu_recency
-
 # launch categorized menu
 bindsym $mod+z exec --no-startup-id morc_menu
-
-# autostart redshift
-exec --no-startup-id /usr/lib/geoclue-2.0/demos/agent
-#exec --no-startup-id redshift-gtk
 
 ################################################################################################
 ## ssh-add script                                                                             ##
 ################################################################################################
+
 exec --no-startup-id exec ~/ssh-add.sh
 
+################################################################################################
 
 ################################################################################################
 ## sound-section - DO NOT EDIT if you wish to automatically upgrade Alsa -> Pulseaudio later! ##
 ################################################################################################
 
 exec --no-startup-id volumeicon
-#bindsym $mod+Ctrl+m exec terminal -e 'alsamixer'
-#Player controls (install playerctl)
+# bindsym $mod+Ctrl+m exec terminal -e 'alsamixer'
+
+# Player controls (install playerctl)
 bindsym XF86AudioPlay exec playerctl play-pause
 bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
+
 #exec --no-startup-id pulseaudio
 #exec --no-startup-id pa-applet
 bindsym $mod+Ctrl+m exec pavucontrol
@@ -73,27 +70,28 @@ bindsym $mod+Ctrl+m exec pavucontrol
 ################################################################################################
 
 # Screen brightness controls
-# bindsym XF86MonBrightnessUp exec "xbacklight -inc 5; notify-send 'brightness up'"
-# bindsym XF86MonBrightnessDown exec "xbacklight -dec 5; notify-send 'brightness down'"
+# bindsym XF86MonBrightnessUp exec "xbacklight -inc 10; notify-send 'brightness up'"
+# bindsym XF86MonBrightnessDown exec "xbacklight -dec 10; notify-send 'brightness down'"
 
 # Start Applications
 bindsym $mod+Ctrl+b exec tilix -e 'bmenu'
 bindsym $mod+F1 exec evolution
 bindsym $mod+F2 exec google-chrome-stable
-bindsym $mod+F3 exec dolphin
+bindsym $mod+F3 exec pcmanfm
 # bindsym $mod+F3 exec ranger
-# bindsym $mod+Shift+F3 exec pcmanfm_pkexec
+bindsym $mod+Shift+F3 exec pcmanfm_pkexec
 bindsym $mod+F4 exec slack
 bindsym $mod+F5 exec spotify
+bindsym $mod+Shift+F5 exec tilix -e 'mocp'
 bindsym $mod+F6 exec discord
 bindsym $mod+F7 exec teams
-# bindsym $mod+F5 exec tilix -e 'mocp'
+
 bindsym $mod+t exec --no-startup-id "pkill compton;  notify-send 'compton killed'"
 bindsym $mod+Ctrl+t exec --no-startup-id "compton; notify-send 'compton started'"
 bindsym $mod+Shift+p --release exec "killall dunst; exec notify-send 'restart dunst'"
-bindsym Print exec --no-startup-id i3-scrot
-bindsym $mod+Print --release exec --no-startup-id i3-scrot -w
-bindsym $mod+Shift+Print --release exec --no-startup-id i3-scrot -s
+bindsym Print exec --no-startup-id "maim ~/Pictures/Screenshot-$(date +%s).png; notify-send 'screenshot captured'"
+bindsym $mod+Print --release exec --no-startup-id "maim -i $(xdotool getactivewindow) ~/Pictures/Screenshot-$(date +%s).png; notify-send 'screenshot captured'"
+bindsym $mod+Shift+Print --release exec --no-startup-id "maim -s ~/Pictures/Screenshot-$(date +%s).png; notify-send 'screenshot captured'"
 bindsym $mod+Shift+h exec xdg-open /usr/share/doc/manjaro/i3_help.pdf
 bindsym $mod+Ctrl+x --release exec --no-startup-id xkill
 
@@ -102,8 +100,8 @@ bindsym $mod+Ctrl+x --release exec --no-startup-id xkill
 # change focus
 bindsym $mod+j focus left
 bindsym $mod+k focus down
-bindsym $mod+l exec "xbacklight -dec 2; notify-send 'brightness down'"
-bindsym $mod+semicolon exec "xbacklight -inc 2; notify-send 'brightness up'"
+bindsym $mod+l focus up
+bindsym $mod+semicolon focus right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
@@ -125,7 +123,7 @@ bindsym $mod+Shift+Right move right
 
 # workspace back and forth (with/without active container)
 workspace_auto_back_and_forth yes
-#bindsym $mod+b workspace back_and_forth
+# bindsym $mod+b workspace back_and_forth
 bindsym $alt+Tab workspace back_and_forth
 bindsym $mod+Shift+b move container to workspace back_and_forth; workspace back_and_forth
 
@@ -157,7 +155,6 @@ bindsym $mod+a focus parent
 # move the currently focused window to the scratchpad
 bindsym $mod+Shift+minus move scratchpad
 
-
 # Show the next scratchpad window or hide the focused scratchpad window.
 # If there are multiple scratchpad windows, this command cycles through them.
 bindsym $mod+minus scratchpad show
@@ -170,11 +167,11 @@ bindsym $mod+Ctrl+Left workspace prev
 # to display names or symbols instead of plain workspace numbers you can use
 # something like: set $ws1 1:mail
 #                 set $ws2 2:
-set $ws1 "1 Terminals >_"
-set $ws2 "2 Browsers "
-set $ws3 "3 Editors "
-set $ws4 "4 Explorers "
-set $ws5 "5 Media "
+set $ws1 "1>_"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
 set $ws6 "6 Social Apps"
 set $ws7 "7"
 set $ws8 "8"
@@ -223,6 +220,7 @@ assign [class="Gedit"] $ws3
 assign [class="Code"] $ws3
 assign [class="Subl3"] $ws3
 assign [class="Pcmanfm"] $ws4
+assign [class="Thunar"] $ws4
 assign [class="dolphin"] $ws4
 assign [class="pcmanfm_pkexec"] $ws4
 assign [class="vlc"] $ws5
@@ -320,10 +318,10 @@ mode "resize" {
         bindsym semicolon resize grow width 5 px or 5 ppt
 
         # same bindings, but for the arrow keys
-        bindsym Left resize shrink width 10 px 
-        bindsym Down resize grow height 10 px 
-        bindsym Up resize shrink height 10 px 
-        bindsym Right resize grow width 10 px 
+        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Down resize grow height 10 px or 10 ppt
+        bindsym Up resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
 
         # exit resize mode: Enter or Escape
         bindsym Return mode "default"
@@ -335,8 +333,7 @@ bindsym $mod+9 exec --no-startup-id blurlock
 
 # Autostart applications
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
-exec --no-startup-id nitrogen --restore; sleep 1; compton -&
-exec --no-startup-id compton -&
+exec --no-startup-id nitrogen --restore; sleep 1; compton -b
 #exec --no-startup-id manjaro-hello
 exec --no-startup-id nm-applet
 exec --no-startup-id xfce4-power-manager
@@ -384,7 +381,7 @@ set_from_resource $term_color15    color15
 # Start i3bar to display a workspace bar (plus the system information i3status if available)
 bar {
 	i3bar_command i3bar
-        status_command i3status
+	status_command i3status
         status_command exec /home/nemesis/.config/i3status/net-speed.sh
 	position bottom
 
@@ -394,34 +391,38 @@ bar {
 
 	bindsym button4 nop
 	bindsym button5 nop
-        #font xft:URWGothic-Book 11
+#   font xft:URWGothic-Book 11
         font pango:Fira Code 10
 	strip_workspace_numbers yes
 
     colors {
-        background #071327
+        background #020E1C
         statusline #F9FAF9
         separator  #42af5f
 
 #                      border  backgr. text
-        # focused_workspace  #F9FAF9 #00ACC1 #292F34
         focused_workspace  #00ACC1 #00ACC1 #292F34
         active_workspace   #595B5B #353836 #FDF6E3
-        # inactive_workspace #595B5B #222D31 #EEE8D5
         inactive_workspace #595B5B #071327 #EEE8D5
-        # binding_mode       #16a085 #2C2C2C #F9FAF9
         binding_mode       #16a085 #C3D82C #292F34
-        # urgent_workspace   #16a085 #ffa00 #E5201D
         urgent_workspace   #16a085 #C3D82C #292F34
+        
+        # urgent_workspace   #16a085 #C3D82C #292F34
+        # focused_workspace  #F9FAF9 #16a085 #292F34
+        # active_workspace   #595B5B #353836 #FDF6E3
+        # inactive_workspace #595B5B #222D31 #EEE8D5
+        # binding_mode       #16a085 #2C2C2C #F9FAF9
+        # urgent_workspace   #16a085 #FDF6E3 #E5201D
     }
 }
+
 # hide/unhide i3status bar
 bindsym $mod+m bar mode toggle
 
 # Theme colors
 # class                   border  backgr. text    indic.   child_border
-  client.focused          #556064 #556064 #80FFF9 #FDF6E3
-  client.focused          #001C47 #001C47 #ffffff #FDF6E3
+  #client.focused          #556064 #556064 #80FFF9 #FDF6E3
+  client.focused          #11325b #11325b #ffffff #FDF6E3 #11325b
   client.focused_inactive #071327 #071327 #ffffff #454948
   client.unfocused        #00000F #00000F #ffffff #454948
   client.urgent           #268BD2 #268BD2 #001C47 #268BD2
@@ -429,11 +430,13 @@ bindsym $mod+m bar mode toggle
 
   client.background       #2B2C2B
 
-#####################################
-### settings for i3-rounded-gaps: ###
-#####################################
+  # client.focused          #556064 #556064 #80FFF9 #FDF6E3
+  # client.focused_inactive #2F3D44 #2F3D44 #1ABC9C #454948
+  # client.unfocused        #2F3D44 #2F3D44 #1ABC9C #454948
+  # client.urgent           #CB4B16 #FDF6E3 #1ABC9C #268BD2
+  # client.placeholder      #000000 #0c0c0c #ffffff #000000 
 
-border_radius 4
+  # client.background       #2B2C2B
 
 #############################
 ### settings for i3-gaps: ###
@@ -449,12 +452,12 @@ gaps outer -2
 # gaps outer all plus 5
 
 # Smart gaps (gaps used if only more than one container on the workspace)
-# smart_gaps on
+smart_gaps inverse_outer
+
 
 # Smart borders (draw borders around container only if it is not the only container on this workspace) 
 # on|no_gaps (on=always activate and no_gaps=only activate if the gap size to the edge of the screen is 0)
 smart_borders on
-smart_borders no_gaps
 
 # Press $mod+Shift+g to enter the gap mode. Choose o or i for modifying outer/inner gaps. Press one of + / - (in-/decrement for current workspace) or 0 (remove gaps for current workspace). If you also press Shift with these keys, the change will be global for all workspaces.
 set $mode_gaps Gaps: (o) outer, (i) inner
@@ -493,3 +496,8 @@ mode "$mode_gaps_outer" {
         bindsym Escape mode "default"
 }
 
+#############################
+### settings to kill apps: ###
+#############################
+
+bindsym $mod+$alt+1 exec --no-startup-id "pkill chrome;  notify-send 'chrome killed'"
