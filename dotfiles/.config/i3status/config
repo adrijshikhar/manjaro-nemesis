@@ -9,9 +9,9 @@
 general {
         colors = true
         interval = 1
-        color_good = "#2AA198"
-        color_bad = "#586E75"
-        color_degraded = "#DC322F"
+        color_good = "#00ACC1"
+        color_bad = "#DC322F"
+        color_degraded = "#586E75"
         output_format = i3bar
 }
 
@@ -32,7 +32,7 @@ wireless _first_ {
 }
 
 cpu_usage {
-        format = " cpu  %usage "
+        format = " cpu %usage "
 }
 
 load {
