@@ -23,7 +23,7 @@ echo "Copying files in home dir"
 
 for f in "${HOME_FILES[@]}"
 do
-    rsync -av "$HOME/$f" $backup_dir
+    rsync -a "$HOME/$f" $backup_dir
 done
 
 
@@ -31,7 +31,7 @@ echo "Copying files in .config dir"
 
 for f in "${CONFIG_FILES[@]}"
 do
-    rsync -av "$config_folder/$f" "$backup_dir/.config"
+    rsync -a "$config_folder/$f" "$backup_dir/.config"
 done
 
 
