@@ -94,12 +94,12 @@ URxvt*color14: #93e0e3
 URxvt*color15: #ffffff
 
 ! fonts
-URxvt*letterSpace: 	    		-2
-URxvt*font:                 	xft:Monospace:regular:size=12
-URxvt*imFont:               	xft:Monospace:regular:size=12
-URxvt*boldFont:             	xft:Monospace:bold:size=12
-URxvt*italicFont:           	xft:Monospace:italic:size=12
-URxvt*boldItalicFont:     		xft:Monospace:regular:size=12
+URxvt*letterSpace: 	    		0
+URxvt*font:                 	xft:Fira Code:regular:size=10
+URxvt*imFont:               	xft:Fira Code:regular:size=10
+URxvt*boldFont:             	xft:Fira Code:bold:size=10
+URxvt*italicFont:           	xft:Fira Code:italic:size=10
+URxvt*boldItalicFont:     		xft:Fira Code:regular:size=10
 ! run :.!fc-list | grep <font-name>
 
 ! perl extensions
@@ -162,7 +162,7 @@ UXTerm*multiScroll:        true
 UXTerm*toolBar:            false
 
 ! fix colors
-UXTerm*background: rgb:63/63/63
+UXTerm*background: rgb:e0/e0/e0
 UXTerm*foreground: rgb:00/00/00
 UXTerm*color0: rgb:00/00/00
 UXTerm*color1: rgb:a8/00/00

@@ -9,9 +9,9 @@
 general {
         colors = true
         interval = 1
-        color_good = "#00ACC1"
-        color_bad = "#DC322F"
-        color_degraded = "#586E75"
+#        color_good = "#00ACC1"
+#        color_bad = "#DC322F"
+#        color_degraded = "#586E75"
         output_format = i3bar
 }
 
@@ -86,4 +86,13 @@ tztime local {
         # format = "%Y-%m-%d %H:%M:%S"
         #format = " %d.%m. %H:%M "
 	format = " %a, %B %e | %I:%M %p"
+}
+
+## audio volume sensor
+volume master {
+    format = " ♪: %volume "
+    format_muted = "♪: m (%volume)"
+    device = "default"
+    mixer = "Master"
+    mixer_idx = 0
 }

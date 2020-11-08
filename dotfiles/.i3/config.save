@@ -105,9 +105,6 @@ workspace 8 output $secondMonitor
 # start dmenu
 bindsym $mod+d exec --no-startup-id dmenu_run 
 
-# start dmenu_recency
-bindsym $mod+Shift+d exec --no-startup-id dmenu_recency 
-
 
 #####################################################################################################################
 #################                          Moving around in i3                                      #################
@@ -263,7 +260,7 @@ set $ws2 "2"
 set $ws3 "3"
 set $ws4 "4"
 set $ws5 "5"
-set $ws6 "6ϟ"
+set $ws6 "6 Social Apps"
 set $ws7 "7"
 set $ws8 "8"
 
@@ -370,6 +367,8 @@ assign [class="URxvt"] $ws1
 
 
 
+
+
 #####################################################################################################################
 #################           autostart   -    execute applications at boot time                      #################
 #####################################################################################################################
@@ -390,7 +389,6 @@ exec --no-startup-id start_conky_maia
 exec --no-startup-id xautolock -time 10 -locker blurlock
 exec_always --no-startup-id ff-theme-util
 exec_always --no-startup-id fix_xcursor
-exec --no-startup-id start_conky_maia
 
 
 
@@ -404,10 +402,10 @@ exec --no-startup-id start_conky_maia
 
 
 # Start Applications
-bindsym control+$mod+b exec tilix -e 'bmenu'
+# bindsym $mod+control+b exec tilix -e 'bmenu'
 bindsym $mod+F1 exec evolution
 bindsym $mod+F2 exec google-chrome-stable
-bindsym $mod+F3 exec pcmanfm
+bindsym $mod+F3 exec thunar
 # bindsym $mod+F3 exec ranger
 bindsym $mod+Shift+F3 exec pcmanfm_pkexec
 bindsym $mod+F4 exec slack
@@ -438,10 +436,10 @@ bindsym control+Shift+Escape exec --no-startup-id xfce4-taskmanager;focus
 
 
 #catfish
-#bindsym control+$alt+c exec --no-startup-id catfish;focus
+bindsym control+$alt+c exec --no-startup-id catfish;focus
 
 #htop
-bindsym $alt+h exec --no-startup-id htop;focus
+bindsym $mod+h exec --no-startup-id htop;focus
 
 #pavucontrol
 #arcolinux conflict
@@ -457,10 +455,6 @@ bindsym control+$alt+p exec --no-startup-id pamac-manager
 #xkill
 bindsym --release $mod+Escape exec xkill
 
-bindsym control+$alt+c exec --no-startup-id "pkill compton;  notify-send 'compton killed'"
-bindsym $mod+Ctrl+t exec --no-startup-id "compton; notify-send 'compton started'"
-bindsym $mod+Shift+p --release exec "killall dunst; exec notify-send 'restart dunst'"
-
 #####################################################################################################################
 #################                          screenshots                                              #################
 #####################################################################################################################
@@ -469,116 +463,6 @@ bindsym $mod+Shift+p --release exec "killall dunst; exec notify-send 'restart du
 bindsym Print exec --no-startup-id "maim ~/Pictures/Screenshot-$(date +%s).png; notify-send 'screenshot captured'"
 bindsym $mod+Print --release exec --no-startup-id "maim -i $(xdotool getactivewindow) ~/Pictures/Screenshot-$(date +%s).png; notify-send 'screenshot captured'"
 bindsym $mod+Shift+Print --release exec --no-startup-id "maim -s ~/Pictures/Screenshot-$(date +%s).png; notify-send 'screenshot captured'"
-
-
-
-
-#####################################################################################################################
-#################                          floating or tiled                                        #################
-#####################################################################################################################
-
-
-#floating enabled from some programs - find with xprop
-
-for_window [class="Arcolinux-welcome-app.py"] floating enable
-#for_window [class="Arcolinux-tweak-tool.py"] floating enable
-for_window [class="Bleachbit"] floating disable
-for_window [class="Blueberry.py"] floating enable
-for_window [class="Brasero"] floating disable
-for_window [class="Galculator"] floating enable
-for_window [class="Gnome-disks"] floating disable
-for_window [class="^Gnome-font-viewer$"] floating enable
-for_window [class="^Gpick$"] floating enable
-for_window [class="Hexchat"] floating disable
-for_window [class="Imagewriter"] floating enable
-for_window [class="Font-manager"] floating enable
-#for_window [class="qt5ct|Lxappearance] floating enable
-for_window [class="Nitrogen"] floating disable
-for_window [class="Pavucontrol"] floating disable
-for_window [class="Peek"] floating enable
-for_window [class="^Skype$"] floating enable
-for_window [class="^Spotify$"] floating disable
-for_window [class="System-config-printer.py"] floating enable
-for_window [class="Unetbootin.elf"] floating enable
-for_window [class="Usb-creator-gtk"] floating enable
-for_window [class="^Vlc$"] floating disable
-for_window [class="Wine"] floating disable
-for_window [class="Xfburn"] floating disable
-for_window [class="Xfce4-appfinder"] floating enable
-for_window [class="Xfce4-settings-manager"] floating disable
-for_window [class="Xfce4-taskmanager"] floating enable
-
-
-#for_window [instance="gimp"] floating disable
-for_window [instance="script-fu"] border normal
-for_window [instance="variety"] floating disable
-
-
-for_window [title="Copying"] floating enable
-for_window [title="Deleting"] floating enable
-for_window [title="Moving"] floating enable
-for_window [title="^Terminator Preferences$"] floating enable
-
-
-#for_window [window_role="^gimp-toolbox-color-dialog$"] floating enable
-for_window [window_role="pop-up"] floating enable
-for_window [window_role="^Preferences$"] floating enable
-for_window [window_role="setup"] floating enable
-
-
-#####################################################################################################################
-#################                          give focus to applications                               #################
-#####################################################################################################################
-
-
-for_window [class="Gnome-terminal"] focus
-for_window [class="Tilix"] focus
-for_window [class="Terminator"] focus
-
-
-#####################################################################################################################
-#################                          bar toggle                                               #################
-#####################################################################################################################
-
-
-# bar toggle, hide or show
-bindsym $mod+b bar mode toggle
-
-
-#####################################################################################################################
-#################                          border control                                           #################
-#####################################################################################################################
-
-
-# Border control
-default_border none
-default_floating_border normal
-
-hide_edge_borders both
-bindsym $mod+shift+b exec --no-startup-id i3-msg border toggle
-for_window [class=".*"] border pixel 0
-
-#changing border style
-#super+t in arcolinux is starting terminal
-bindsym $mod+t border normal
-bindsym $mod+y border 1pixel
-bindsym $mod+u border none
-
-
-#new_window pixel 1
-new_window normal
-#new_window none
-
-#new_float pixel 1
-new_float normal
-#new_float none
-
-#####################################################################################################################
-#################                          Popups  control                                          #################
-#####################################################################################################################
-
-#Popups during fullscreen mode
-popup_during_fullscreen smart
 
 
 ################################################################################################
@@ -590,10 +474,6 @@ bindsym $mod+Ctrl+m exec terminal -e 'alsamixer'
 #exec --no-startup-id pulseaudio
 #exec --no-startup-id pa-applet
 #bindsym $mod+Ctrl+m exec pavucontrol
-bindsym XF86AudioPlay exec --no-startup-id playerctl play-pause
-bindsym XF86AudioNext exec --no-startup-id playerctl next
-bindsym XF86AudioPrev exec --no-startup-id playerctl previous
-bindsym XF86AudioStop exec --no-startup-id playerctl stop
 
 ################################################################################################
 
@@ -658,10 +538,6 @@ mode "$mode_system" {
 # Lock screen
 bindsym $mod+9 exec --no-startup-id blurlock
 
-
-#####################################################################################################################
-
-
 #
 #
 ## Color palette used for the terminal ( ~/.Xresources file )
@@ -694,25 +570,11 @@ bindsym $mod+9 exec --no-startup-id blurlock
 #set_from_resource $term_color13    color13
 #set_from_resource $term_color14    color14
 #set_from_resource $term_color15    color15
-#####################################################################################################################
-
-
-#####################################################################################################################
-#####################################################################################################################
-#####################################################################################################################
-#################                          bar appearance                                           #################
-#####################################################################################################################
-#####################################################################################################################
-#####################################################################################################################
 
 # Start i3bar to display a workspace bar (plus the system information i3status if available)
 bar {
-        height 20
-        strip_workspace_numbers yes
-        font pango:Fira Code 9
-        i3bar_command i3bar
+	i3bar_command i3bar
 	status_command i3status
-        status_command exec /home/nemesis/.config/i3status/net-speed.sh
 	position bottom
 
 ## please set your primary output first. Example: 'xrandr --output eDP1 --primary'
@@ -722,37 +584,38 @@ bar {
 	bindsym button4 nop
 	bindsym button5 nop
 #   font xft:URWGothic-Book 11
+	strip_workspace_numbers yes
 
     colors {
-        background #020E1C
+        background #222D31
         statusline #F9FAF9
         separator  #454947
 
-        # colorclass           border  backgr. text
-        focused_workspace  #00ACC1 #00ACC1 #292F34
+#                      border  backgr. text
+        focused_workspace  #F9FAF9 #16a085 #292F34
         active_workspace   #595B5B #353836 #FDF6E3
-        inactive_workspace #595B5B #071327 #EEE8D5
-        binding_mode       #16a085 #C3D82C #292F34
-        urgent_workspace   #16a085 #C3D82C #292F34
-        }
+        inactive_workspace #595B5B #222D31 #EEE8D5
+        binding_mode       #16a085 #2C2C2C #F9FAF9
+        urgent_workspace   #16a085 #FDF6E3 #E5201D
+    }
 }
 
 # hide/unhide i3status bar
 bindsym $mod+m bar mode toggle
 
 # Theme colors
-    # class                 border  backgr. text    indicator
-    client.focused          #11325b #11325b #ffffff #FDF6E3 #11325b
-    client.focused_inactive #071327 #071327 #ffffff #454948
-    client.unfocused        #00000F #00000F #ffffff #454948
-    client.urgent           #268BD2 #268BD2 #001C47 #268BD2
-    client.placeholder      #000000 #0c0c0c #ffffff #000000 
+# class                   border  backgr. text    indic.   child_border
+  client.focused          #556064 #556064 #80FFF9 #FDF6E3
+  client.focused_inactive #2F3D44 #2F3D44 #1ABC9C #454948
+  client.unfocused        #2F3D44 #2F3D44 #1ABC9C #454948
+  client.urgent           #CB4B16 #FDF6E3 #1ABC9C #268BD2
+  client.placeholder      #000000 #0c0c0c #ffffff #000000 
 
-    client.background       #242424
+  client.background       #2B2C2B
 
-#####################################################################################################################
-#################                          i3 gaps next                                             #################
-#####################################################################################################################
+#############################
+### settings for i3-gaps: ###
+#############################
 
 # Set inner/outer gaps
 gaps inner 14
@@ -764,20 +627,13 @@ gaps outer -2
 # gaps outer all plus 5
 
 # Smart gaps (gaps used if only more than one container on the workspace)
-smart_gaps inverse_outer
+smart_gaps on
 
 # Smart borders (draw borders around container only if it is not the only container on this workspace) 
 # on|no_gaps (on=always activate and no_gaps=only activate if the gap size to the edge of the screen is 0)
 smart_borders on
 
-
-
-#####################################################################################################################
-#################                          i3 gaps change                                           #################
-#####################################################################################################################
-
-
-
+# Press $mod+Shift+g to enter the gap mode. Choose o or i for modifying outer/inner gaps. Press one of + / - (in-/decrement for current workspace) or 0 (remove gaps for current workspace). If you also press Shift with these keys, the change will be global for all workspaces.
 set $mode_gaps Gaps: (o) outer, (i) inner
 set $mode_gaps_outer Outer Gaps: +|-|0 (local), Shift + +|-|0 (global)
 set $mode_gaps_inner Inner Gaps: +|-|0 (local), Shift + +|-|0 (global)
@@ -789,7 +645,6 @@ mode "$mode_gaps" {
         bindsym Return mode "default"
         bindsym Escape mode "default"
 }
-
 mode "$mode_gaps_inner" {
         bindsym plus  gaps inner current plus 5
         bindsym minus gaps inner current minus 5
@@ -814,11 +669,3 @@ mode "$mode_gaps_outer" {
         bindsym Return mode "default"
         bindsym Escape mode "default"
 }
-
-
-
-#############################
-### settings to kill apps: ###
-#############################
-
-bindsym $mod+$alt+1 exec --no-startup-id "pkill chrome;  notify-send 'chrome killed'"
