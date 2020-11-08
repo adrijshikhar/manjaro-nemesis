@@ -1,0 +1,5 @@
+[user]
+	email = adrijshikhar85@gmail.com
+	name = Adrij Shikhar
+[alias]
+	sl = log --graph --pretty=format:'%C(yellow)%d%Creset %s %n%Cgreen(%cr) %C(bold blue)%Cred%h%Creset - <%an>%Creset%n' --abbrev-commit --date=relative --all
