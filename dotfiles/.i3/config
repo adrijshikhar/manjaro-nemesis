@@ -587,13 +587,16 @@ popup_during_fullscreen smart
 
 #exec --no-startup-id volumeicon
 #bindsym $mod+Ctrl+m exec terminal -e 'alsamixer'
-#exec --no-startup-id pulseaudio
-#exec --no-startup-id pa-applet
-#bindsym $mod+Ctrl+m exec pavucontrol
+exec --no-startup-id start-pulseaudio-x11
+exec --no-startup-id pa-applet
+bindsym $mod+Ctrl+m exec pavucontrol
 bindsym XF86AudioPlay exec --no-startup-id playerctl play-pause
 bindsym XF86AudioNext exec --no-startup-id playerctl next
 bindsym XF86AudioPrev exec --no-startup-id playerctl previous
 bindsym XF86AudioStop exec --no-startup-id playerctl stop
+
+bindsym $mod+$alt+a exec --no-startup-id "pacmd set-sink-port 0 analog-output-headphones"
+bindsym $mod+$alt+s exec --no-startup-id "pacmd set-sink-port 0 analog-output-speaker"
 
 ################################################################################################
 
