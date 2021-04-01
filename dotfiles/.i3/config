@@ -67,6 +67,8 @@ set $right semicolon
 #exec --no-startup-id xrandr --output DVI-D-1 --right-of DVI-I-1 --auto
 exec --no-startup-id xrandr --output HDMI2 --right-of HDMI1 --auto
 
+# duplicate screen to monitor
+bindsym $mod+a exec --no-startup-id  xrandr --output HDMI-1-0 --primary --auto
 
 # my current setup
 
@@ -103,10 +105,10 @@ workspace 8 output $secondMonitor
 #####################################################################################################################
 
 # start dmenu
-bindsym $mod+d exec --no-startup-id dmenu_run 
+bindsym $mod+d exec --no-startup-id "LC_CTYPE=en_GB.UTF-8 dmenu_run" 
 
 # start dmenu_recency
-bindsym $mod+Shift+d exec --no-startup-id dmenu_recency 
+bindsym $mod+Shift+d exec --no-startup-id "LC_CTYPE=en_GB.UTF-8 dmenu_recency"   
 
 
 #####################################################################################################################
@@ -195,7 +197,7 @@ bindsym $mod+e layout toggle split
 bindsym $mod+space focus mode_toggle
 
 # focus the parent container
-bindsym $mod+a focus parent
+# bindsym $mod+a focus parent
 
 # focus the child container
 #bindsym $mod+d focus child
@@ -377,7 +379,7 @@ assign [class="URxvt"] $ws1
 
 # Autostart applications
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
-exec --no-startup-id nitrogen --restore; sleep 1; picom -b
+exec --no-startup-id nitrogen --restore; sleep 1; compton -b
 #exec --no-startup-id manjaro-hello
 exec --no-startup-id nm-applet
 exec --no-startup-id xfce4-power-manager
@@ -414,7 +416,7 @@ bindsym $mod+F4 exec slack
 bindsym $mod+F5 exec spotify
 bindsym $mod+Shift+F5 exec tilix -e 'mocp'
 bindsym $mod+F6 exec discord
-bindsym $mod+F7 exec teams
+bindsym $mod+F7 exec telegram-desktop
 
 
 #not workspace related
@@ -443,10 +445,6 @@ bindsym control+Shift+Escape exec --no-startup-id xfce4-taskmanager;focus
 #htop
 bindsym $alt+h exec --no-startup-id htop;focus
 
-#pavucontrol
-#arcolinux conflict
-bindsym control+$alt+u exec --no-startup-id pavucontrol
-
 # start xfce-appfinder
 #arcolinux does not seem to work
 bindsym control+$alt+a exec --no-startup-id xfce4-appfinder
@@ -457,8 +455,8 @@ bindsym control+$alt+p exec --no-startup-id pamac-manager
 #xkill
 bindsym --release $mod+Escape exec xkill
 
-bindsym control+$alt+c exec --no-startup-id "pkill compton;  notify-send 'compton killed'"
-bindsym $mod+Ctrl+t exec --no-startup-id "compton; notify-send 'compton started'"
+bindsym control+$mod+c exec --no-startup-id "pkill compton;  notify-send 'compton killed'"
+bindsym $mod+control+t exec --no-startup-id "compton -b; notify-send 'compton started'"
 bindsym $mod+Shift+p --release exec "killall dunst; exec notify-send 'restart dunst'"
 
 #####################################################################################################################
@@ -595,8 +593,8 @@ bindsym XF86AudioNext exec --no-startup-id playerctl next
 bindsym XF86AudioPrev exec --no-startup-id playerctl previous
 bindsym XF86AudioStop exec --no-startup-id playerctl stop
 
-bindsym $mod+$alt+a exec --no-startup-id "pacmd set-sink-port 0 analog-output-headphones"
-bindsym $mod+$alt+s exec --no-startup-id "pacmd set-sink-port 0 analog-output-speaker"
+bindsym $mod+$alt+a exec --no-startup-id "pacmd set-sink-port 0 analog-output-headphones; notify-send 'switched to headphones'"
+bindsym $mod+$alt+s exec --no-startup-id "pacmd set-sink-port 0 analog-output-speaker; notify-send 'switched to speaker'"
 
 ################################################################################################
 
@@ -825,3 +823,6 @@ mode "$mode_gaps_outer" {
 #############################
 
 bindsym $mod+$alt+1 exec --no-startup-id "pkill chrome;  notify-send 'chrome killed'"
+
+
+
