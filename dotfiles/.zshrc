@@ -1,44 +1,32 @@
 # If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
-
-#autoload -Uz compinit && compinit -i
+export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-#installation via script from github
-#export ZSH="/home/$USER/.oh-my-zsh"
-#installation via yay -S oh-my-zsh-git
-export ZSH="/home/nemesis/.oh-my-zsh"
+export ZSH=$HOME/.oh-my-zsh
 
-# Set name of the theme to load --- if set to "random", it will
-# load a random theme each time oh-my-zsh is loaded, in which case,
-# to know which specific one was loaded, run: echo $RANDOM_THEME
-# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="sunrise"
+# Set name of the theme to load. Optionally, if you set this to "random"
+# it'll load a random theme each time that oh-my-zsh is loaded.
+# See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
+ZSH_THEME="garyblessington"
 
-# Set list of themes to pick from when loading at random
-# Setting this variable when ZSH_THEME=random will cause zsh to load
-# a theme from this variable instead of looking in ~/.oh-my-zsh/themes/
-# If set to an empty array, this variable will have no effect.
-# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
+# Autojump
+#. /usr/share/autojump/autojump.zsh
+
+# Import colorscheme from wal
+#(wal -r &)
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
 
-# Uncomment the following line to use hyphen-insensitive completion.
-# Case-sensitive completion must be off. _ and - will be interchangeable.
+# Uncomment the following line to use hyphen-insensitive completion. Case
+# sensitive completion must be off. _ and - will be interchangeable.
 # HYPHEN_INSENSITIVE="true"
 
 # Uncomment the following line to disable bi-weekly auto-update checks.
 # DISABLE_AUTO_UPDATE="true"
 
-# Uncomment the following line to automatically update without prompting.
-# DISABLE_UPDATE_PROMPT="true"
-
 # Uncomment the following line to change how often to auto-update (in days).
 # export UPDATE_ZSH_DAYS=13
-
-# Uncomment the following line if pasting URLs and other text is messed up.
-# DISABLE_MAGIC_FUNCTIONS=true
 
 # Uncomment the following line to disable colors in ls.
 # DISABLE_LS_COLORS="true"
@@ -59,40 +47,37 @@ ZSH_THEME="sunrise"
 
 # Uncomment the following line if you want to change the command execution time
 # stamp shown in the history command output.
-# You can set one of the optional three formats:
-# "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-# or set a custom format using the strftime function format specifications,
-# see 'man strftime' for details.
+# The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
 # HIST_STAMPS="mm/dd/yyyy"
 
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
-# Which plugins would you like to load?
-# Standard plugins can be found in ~/.oh-my-zsh/plugins/*
+# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(
-    git
-    zsh-autosuggestions
-    history
-    nvm
-    npm
-    zsh-syntax-highlighting
-    zsh-better-npm-completion
-)
+plugins=(git)
 
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
+export HISTSIZE=500000
+export SAVEHIST=500000
 # export MANPATH="/usr/local/man:$MANPATH"
 
+# Cursor
+#echo -e -n "\x1b[\x30 q" # changes to blinking block
+#echo -e -n "\x1b[\x31 q" # changes to blinking block also
+#echo -e -n "\x1b[\x32 q" # changes to steady block
+#echo -e -n "\x1b[\x33 q" # changes to blinking underline
+echo -e -n "\x1b[\x34 q" # changes to steady underline
+#echo -e -n "\x1b[\x35 q" # changes to blinking bar
+#echo -e -n "\x1b[\x36 q" # changes to steady bar
+
 # You may need to manually set your language environment
-# export LANGUAGE=en_US.UTF-8
 # export LANG=en_US.UTF-8
-# export LC_ALL=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
@@ -104,233 +89,169 @@ source $ZSH/oh-my-zsh.sh
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
+# ssh
+# export SSH_KEY_PATH="~/.ssh/rsa_id"
 
-####   ARCOLINUX SETTINGS   ####
+# Find new executables in path
+zstyle ':completion:*' rehash true
 
+#This causes pasted URLs to be automatically escaped, without needing to disable globbing.
+autoload -Uz bracketed-paste-magic
+zle -N bracketed-paste bracketed-paste-magic
+autoload -Uz url-quote-magic
+zle -N self-insert url-quote-magic
 
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+# --- Remembering recent directories ---
+# --- NOTE: Doesn't work if you have more than one zsh session open, and attempt to cd, due to a conflict in both sessions writing to the same file. ---
+#DIRSTACKFILE="$HOME/.cache/zsh/dirs"
+#if [[ -f $DIRSTACKFILE ]] && [[ $#dirstack -eq 0 ]]; then
+  #dirstack=( ${(f)"$(< $DIRSTACKFILE)"} )
+  #[[ -d $dirstack[1] ]] && cd $dirstack[1]
+#fi
+#chpwd() {
+  #print -l $PWD ${(u)dirstack} >$DIRSTACKFILE
+#}
 
-setopt GLOB_DOTS
+#DIRSTACKSIZE=20
 
-# If not running interactively, don't do anything
-[[ $- != *i* ]] && return
+#setopt AUTO_PUSHD PUSHD_SILENT PUSHD_TO_HOME
 
-export HISTCONTROL=ignoreboth:erasedups
+### Remove duplicate entries
+#setopt PUSHD_IGNORE_DUPS
 
-#PS1='[\u@\h \W]\$ '
+### This reverts the +/- operators.
+#setopt PUSHD_MINUS
+# --------------------------------------
 
-if [ -d "$HOME/.bin" ] ;
-then PATH="$HOME/.bin:$PATH"
+# Allows st to use different cursors in different vim modes (in neovim)
+#export TERM=xterm
+#export TERM=xterm-256color
+
+# Possible fix for del key not working on st
+#function zle-line-init () { echoti smkx }
+#function zle-line-finish () { echoti rmkx }
+#zle -N zle-line-init
+#zle -N zle-line-finish
+
+# Set current working directory for termite
+if [[ $TERM == xterm-termite ]]; then
+  source /etc/profile.d/vte-2.91.sh
 fi
 
-if [ -d "$HOME/.local/bin" ] ;
-then PATH="$HOME/.local/bin:$PATH"
-fi
-
-#list
-alias ls='ls --color=auto'
-alias la='ls -a'
-alias l='ls -la'
-alias l.="ls -A | egrep '^\.'"
-
-#fix obvious typo's
-alias cd..='cd ..'
-alias pdw="pwd"
-alias udpate='sudo pacman -Syyu'
-alias upate='sudo pacman -Syyu'
-
-## Colorize the grep command output for ease of use (good for log files)##
-alias grep='grep --color=auto'
-alias egrep='egrep --color=auto'
-alias fgrep='fgrep --color=auto'
-
-#readable output
-alias df='df -h'
-
-#pacman unlock
-alias unlock="sudo rm /var/lib/pacman/db.lck"
-
-#free
-alias free="free -mt"
-
-#use all cores
-alias uac="sh ~/.bin/main/000*"
-
-#continue download
-alias wget="wget -c"
-
-#userlist
-alias userlist="cut -d: -f1 /etc/passwd"
-
-#merge new settings
-alias merge="xrdb -merge ~/.Xresources"
-
-# Aliases for software managment
-# pacman or pm
-alias pacman='sudo pacman --color auto'
-alias update='sudo pacman -Syyu'
-
-# yay as aur helper - updates everything
-alias pksyua="yay -Syu --noconfirm"
-alias upall="yay -Syu --noconfirm"
-
-#ps
-alias psa="ps auxf"
-alias psgrep="ps aux | grep -v grep | grep -i -e VSZ -e"
-
-#grub update
-alias update-grub="sudo grub-mkconfig -o /boot/grub/grub.cfg"
-
-#add new fonts
-alias update-fc='sudo fc-cache -fv'
-
-#copy/paste all content of /etc/skel over to home folder - backup of config created - beware
-alias skel='cp -Rf ~/.config ~/.config-backup-$(date +%Y.%m.%d-%H.%M.%S) && cp -rf /etc/skel/* ~'
-#backup contents of /etc/skel to hidden backup folder in home/user
-alias bupskel='cp -Rf /etc/skel ~/.skel-backup-$(date +%Y.%m.%d-%H.%M.%S)'
-
-#copy bashrc-latest over on bashrc - cb= copy bashrc
-#alias cb='sudo cp /etc/skel/.bashrc ~/.bashrc && source ~/.bashrc'
-#copy /etc/skel/.zshrc over on ~/.zshrc - cb= copy zshrc
-alias cz='sudo cp /etc/skel/.zshrc ~/.zshrc && source ~/.zshrc'
-
-#switch between bash and zsh
-alias tobash="sudo chsh $USER -s /bin/bash && echo 'Now log out.'"
-alias tozsh="sudo chsh $USER -s /bin/zsh && echo 'Now log out.'"
-
-#quickly kill conkies
-alias kc='killall conky'
-
-#hardware info --short
-alias hw="hwinfo --short"
-
-#skip integrity check
-alias yayskip='yay -S --mflags --skipinteg'
-alias trizenskip='trizen -S --skipinteg'
-
-#check vulnerabilities microcode
-alias microcode='grep . /sys/devices/system/cpu/vulnerabilities/*'
-
-
-#mounting the folder Public for exchange between host and guest on virtualbox
-alias vbm="sudo /usr/local/bin/arcolinux-vbox-share"
-
-
-#Recent Installed Packages
-alias rip="expac --timefmt='%Y-%m-%d %T' '%l\t%n %v' | sort | tail -200 | nl"
-alias riplong="expac --timefmt='%Y-%m-%d %T' '%l\t%n %v' | sort | tail -3000 | nl"
-
-#iso and version used to install ArcoLinux
-alias iso="cat /etc/dev-rel | awk -F '=' '/ISO/ {print $2}'"
-
-#Cleanup orphaned packages
-alias cleanup='sudo pacman -Rns $(pacman -Qtdq)'
-
-#get the error messages from journalctl
-alias jctl="journalctl -p 3 -xb"
-
-
-#gpg
-#verify signature for isos
-alias gpg-check="gpg2 --keyserver-options auto-key-retrieve --verify"
-#receive the key of a developer
-alias gpg-retrieve="gpg2 --keyserver-options auto-key-retrieve --receive-keys"
-
-#shutdown or reboot
-alias ssn="sudo shutdown now"
-alias sr="sudo reboot"
-
-#maintenance
-alias big="expac -H M '%m\t%n' | sort -h | nl"
-alias downgrada="sudo downgrade --ala-url https://bike.seedhost.eu/arcolinux/"
-
-#systeminfo
-alias probe="sudo -E hw-probe -all -upload"
-
-# # ex = EXtractor for all kinds of archives
-# # usage: ex <file>
-ex ()
-{
-    if [ -f $1 ] ; then
-        case $1 in
-            *.tar.bz2)   tar xjf $1   ;;
-            *.tar.gz)    tar xzf $1   ;;
-            *.bz2)       bunzip2 $1   ;;
-            *.rar)       unrar x $1   ;;
-            *.gz)        gunzip $1    ;;
-            *.tar)       tar xf $1    ;;
-            *.tbz2)      tar xjf $1   ;;
-            *.tgz)       tar xzf $1   ;;
-            *.zip)       unzip $1     ;;
-            *.Z)         uncompress $1;;
-            *.7z)        7z x $1      ;;
-            *.deb)       ar x $1      ;;
-            *.tar.xz)    tar xf $1    ;;
-            *)           echo "'$1' cannot be extracted via ex()" ;;
-        esac
-    else
-        echo "'$1' is not a valid file"
-    fi
+# Freeze and unfreeze processes (for example: stop firefox)
+stop(){
+  if [ $# -ne 1 ]; then
+          echo 1>&2 Usage: stop process
+  else
+    PROCESS=$1
+    echo "Stopping processes with the word ${tGreen}$1${tReset}"
+    ps axw | grep -i $1 | awk -v PROC="$1" '{print $1}' | xargs kill -STOP
+  fi
 }
 
-#create a file called .zshrc-personal and put all your personal aliases
-#in there. They will not be overwritten by skel.
+cont(){
+  if [ $# -ne 1 ]; then
+          echo 1>&2 Usage: cont process
+  else
+    PROCESS=$1
+    echo "Continuing processes with the word ${tGreen}$1${tReset}"
+    ps axw | grep -i $1 | awk -v PROC="$1" '{print $1}' | xargs kill -CONT
+  fi
+}
+
+export WEECHAT_HOME="~/.config/weechat"
+
+export EDITOR=vim
+export BROWSER=firefox
+
+# Set personal aliases, overriding those provided by oh-my-zsh libs,
+# plugins, and themes. Aliases can be placed here, though oh-my-zsh
+# users are encouraged to define aliases within the ZSH_CUSTOM folder.
+# For a full list of active aliases, run `alias`.
+#
+# Example aliases
+# alias zshconfig="mate ~/.zshrc"
+# alias ohmyzsh="mate ~/.oh-my-zsh"
+alias h="history"
+alias p="pwd -P"
+alias s="sudo -s"
+alias CD="cd"
+alias hc='herbstclient'
+alias ff='firefox'
+# Force tmux to use 256 colors
+# Either set this or TERM=xterm (or both if tmux keeps messing up?)
+#alias tmux="tmux -2"
+# clock
+#alias c="while sleep 1;do tput sc;tput cup 0 $(($(tput cols)-29));date;tput rc;done &; clear"
+
+alias netprocs="lsof -P -i -n"
+alias up="sudo apt update && sudo apt upgrade"
+# So that sudo doesnt override aliases (doesnt work with flags)
+# alias sudo='sudo '
+
+# neovim
+# alias vim="nvim" # not needed since i used update-alternatives
+alias init.vim="vim ~/.config/nvim/init.vim"
+
+# Quick edit
+alias xr="vim ~/.Xresources"
+alias xrc="vim ~/.wally/Xresources-clean"
+alias zshrc="vim ~/.zshrc"
+alias i3config="vim ~/.config/i3/config"
+alias polyconf="vim ~/.config/polybar/config"
+alias dunstrc="vim ~/.config/dunst/dunstrc"
+alias tint2rc="vim ~/.config/tint2/tint2rc"
+alias userChrome.css="vim ~/thm/Firefox/userChrome.css"
+alias stconf="vim ~/pro/xst/src/config.h"
+alias playlists="vim ~/.config/mpv/tubify_playlists"
+alias airlinevim="vim ~/.config/nvim/plugged/vim-airline/autoload/airline/themes/dark.vim"
+alias quteconf="vim ~/.config/qutebrowser/config.py"
+alias comptonconf="vim ~/.config/compton/compton.conf"
+alias rc.lua="vim ~/.config/awesome/rc.lua"
+alias theme.lua="vim ~/.config/awesome/themes/reasons/theme.lua"
+#alias awesomeconf="vim ~/.config/awesome/rc.lua"
+#alias subl="subl3"
+# Update qutebrowser
+alias quteup="(cd ~/pro/qutebrowser; git pull origin && tox -r -e mkvenv-pypi-old)"
+
+# nvidia optimus -> prime select 
+alias nvidia="sudo prime-select nvidia"
+alias intel="sudo prime-select intel"
+# cpu governor
+alias gameoff="sudo cpufreq-set -g powersave"
+alias gameon="sudo cpufreq-set -g performance"
+
+# translate-shell: brief
+alias t='trans -brief'
+
+# --- even-better-ls ---  
+# LS_COLORS=$(ls_colors_generator)
+# run_ls() {
+#         ls-i --color=auto --group-directories-first -w $(tput cols) "$@"
+# }
+
+# run_dir() {
+#         dir-i --color=auto --group-directories-first -w $(tput cols) "$@"
+# }
+
+# run_vdir() {
+#         vdir-i --color=auto --group-directories-first -w $(tput cols) "$@"
+# }
+# alias ls="run_ls"
+# alias dir="run_dir"
+# alias vdir="run_vdir"
+# --- ---
+
+# urxvt
+#bindkey "^[Od" backward-word
+#bindkey "^[Oc" forward-word
+bindkey "^H" backward-kill-word
+#bindkey "^[[3^" kill-word
+
+# other
+bindkey "^[[1;5D" backward-word
+bindkey "^[[1;5C" forward-word
+# lxterminal doesnt detect diff between backspace and ctrl + backspace
+#bindkey "^?" backward-kill-word
 
 [[ -f ~/.zshrc-personal ]] && . ~/.zshrc-personal
-
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_com$
-
-export PATH="$PATH:/home/nemesis/Development/flutter/bin"
-export ANDROID_HOME="$HOME/Development/Android/Sdk"
-export PATH="$PATH:$ANDROID_HOME/tools"
-export PATH="$PATH:$ANDROID_HOME/tools/bin"
-export JAVA_HOME="/usr/lib/jvm/java-8-openjdk/"
-export PATH="$PATH:$ANDROID_HOME/platform-tools"
-export PATH="$PATH:$HOME/.local/bin"
-export PATH="$PATH:$HOME/bin"
-
-# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-export PATH="$PATH:$HOME/.rvm/bin"
-
-export APACHE_LOG_DIR="/var/log/httpd"
-export GOPATH=$HOME/Documents/my-projects/golib
-export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin
-# export GOPATH=$GOPATH:$HOME/Documents/my-projects/go-basics
-export PATH=$PATH:$GOPATH
-export PATH="$PATH:$HOME/.composer/vendor/bin"
-export PATH="$PATH:$HOME/.local/bin/MATLAB/R2020b/bin"
-
-export DENO_INSTALL="/home/nemesis/.deno"
-export PATH="$DENO_INSTALL/bin:$PATH"
-
-# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-export PATH="$PATH:$HOME/.rvm/bin"
-export CHANGELOG_GITHUB_TOKEN="c9c6c5847ac7cb153da5f2718079fe49dcfbdf2f"
-export BROWSER=/usr/bin/google-chrome-stable
-
-alias hcat="highlight"
-alias c="code ."
-alias ci="code-insiders ."
-alias nip="npm --prefer-offline install"
-
-fpath=(~/.zsh/completion $fpath)
-
-
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/nemesis/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/home/nemesis/anaconda3/etc/profile.d/conda.sh" ]; then
-        . "/home/nemesis/anaconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="/home/nemesis/anaconda3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
-
