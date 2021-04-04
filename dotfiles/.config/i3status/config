@@ -9,13 +9,14 @@
 general {
         colors = true
         interval = 1
-#        color_good = "#00ACC1"
-#        color_bad = "#DC322F"
-#        color_degraded = "#586E75"
+        color_good = "#21B089"
+        color_bad = "#F9555F"
+        color_degraded = "#FFFF55"
         output_format = i3bar
 }
 
 # order += "ipv6"
+order += "volume master"
 order += "cpu_usage"
 order += "disk /"
 order += "disk /home"
@@ -62,15 +63,18 @@ battery all {
         format_down = "No battery"
         last_full_capacity = true
         integer_battery_capacity = true
-        status_chr = ""
+        status_chr = "⚡"
+        status_bat = "🔋"
+        status_unk = "?"
+        status_full = "☻"
+
+        #status_chr = ""
         # status_chr = "⚡"
         # status_bat = "bat"
         # status_bat = "☉"
-        status_bat = ""
+        # status_bat = ""
         # status_unk = "?"
-        status_unk = ""
-        status_full = ""
-        #status_full = "☻"
+        # status_unk = ""
         low_threshold = 15
         threshold_type = time
 }

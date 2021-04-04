@@ -105,7 +105,15 @@ workspace 8 output $secondMonitor
 #####################################################################################################################
 
 # start dmenu
-bindsym $mod+d exec --no-startup-id "LC_CTYPE=en_GB.UTF-8 dmenu_run" 
+bindsym $mod+d exec --no-startup-id "LC_CTYPE=en_US.UTF-8 dmenu_run" 
+
+# start rofi
+# bindsym $mod+d exec LC_CTYPE=en_US.UTF-8 rofi -show run
+
+bindsym $mod+m exec --no-startup-id ~/.config/rofi/bin/launcher_text
+bindsym $mod+n exec --no-startup-id ~/.config/rofi/bin/menu_network
+bindsym $mod+p exec --no-startup-id ~/.config/rofi/bin/menu_powermenu
+
 
 # start dmenu_recency
 bindsym $mod+Shift+d exec --no-startup-id "LC_CTYPE=en_GB.UTF-8 dmenu_recency"   
@@ -583,8 +591,8 @@ popup_during_fullscreen smart
 ## sound-section - DO NOT EDIT if you wish to automatically upgrade Alsa -> Pulseaudio later! ##
 ################################################################################################
 
-#exec --no-startup-id volumeicon
-#bindsym $mod+Ctrl+m exec terminal -e 'alsamixer'
+##exec --no-startup-id volumeicon
+##bindsym $mod+Ctrl+m exec terminal -e 'alsamixer'
 exec --no-startup-id start-pulseaudio-x11
 exec --no-startup-id pa-applet
 bindsym $mod+Ctrl+m exec pavucontrol
@@ -730,23 +738,23 @@ bar {
         separator  #454947
 
         # colorclass           border  backgr. text
-        focused_workspace  #00ACC1 #00ACC1 #292F34
-        active_workspace   #595B5B #353836 #FDF6E3
-        inactive_workspace #595B5B #071327 #EEE8D5
-        binding_mode       #16a085 #C3D82C #292F34
-        urgent_workspace   #16a085 #C3D82C #292F34
+        focused_workspace  #1F9EE7 #1F9EE7 #071327
+        active_workspace   #555555 #555555 #FDF6E3
+        inactive_workspace #555555 #071327 #EEE8D5
+        binding_mode       #16a085 #FEF02A #555555
+        urgent_workspace   #16a085 #FEF02A #555555
         }
 }
 
 # hide/unhide i3status bar
-bindsym $mod+m bar mode toggle
+# bindsym $mod+m bar mode toggle
 
 # Theme colors
     # class                 border  backgr. text    indicator
-    client.focused          #11325b #11325b #ffffff #FDF6E3 #11325b
+    client.focused          #3979BC #3979BC #ffffff #FDF6E3 #3979BC
     client.focused_inactive #071327 #071327 #ffffff #454948
     client.unfocused        #00000F #00000F #ffffff #454948
-    client.urgent           #268BD2 #268BD2 #001C47 #268BD2
+    client.urgent           #21B089 #21B089 #001C47 #21B089
     client.placeholder      #000000 #0c0c0c #ffffff #000000 
 
     client.background       #242424
