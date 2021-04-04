@@ -1,4 +1,4 @@
-# i3 config file (v4)
+ # i3 config file (v4)
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
 #####################################################################################################################
@@ -738,11 +738,11 @@ bar {
         separator  #454947
 
         # colorclass           border  backgr. text
-        focused_workspace  #1F9EE7 #1F9EE7 #071327
+        focused_workspace  #589DF6 #589DF6 #071327
         active_workspace   #555555 #555555 #FDF6E3
         inactive_workspace #555555 #071327 #EEE8D5
-        binding_mode       #16a085 #FEF02A #555555
-        urgent_workspace   #16a085 #FEF02A #555555
+        binding_mode       #21B089 #21B089 #071327
+        urgent_workspace   #21B089 #21B089 #071327
         }
 }
 
