@@ -1,6 +1,12 @@
-/** Basic config file **/
+/*
+==============================================================
+=====[ ROFI
+==============================================================
+*/
 
 configuration {
-  show-icons:         true;
-  icon-theme:         "Papirus";
+    color-normal: "#21242b, #FDF9F3, #21242b, #2F3B48, #51AFEF";
+	color-urgent: "#21242b, #FDF9F3, #21242b, #21242b, #98BE65";
+	color-active: "#21242b, #FDF9F3, #21242b, #21242b, #98BE65";
+	color-window: "#282c34, #21242b, #51AFEF";
 }

@@ -245,7 +245,7 @@ mode "resize" {
 # choose your font
 #font pango:Noto Mono Regular 13
 
-font pango:Noto Sans, FontAwesome 10
+font pango:Noto Sans, FontAwesome 0
 for_window [class=".*"] title_format "    <b>%title</b>"
 
 
@@ -260,12 +260,12 @@ for_window [class=".*"] title_format "    <b>%title</b>"
 # to display names or symbols instead of plain workspace numbers you can use
 # something like: set $ws1 1:mail
 #                 set $ws2 2:
-set $ws1 "1>_"
-set $ws2 "2"
-set $ws3 "3"
-set $ws4 "4"
-set $ws5 "5"
-set $ws6 "6ϟ"
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
 set $ws7 "7"
 set $ws8 "8"
 
@@ -311,21 +311,26 @@ assign [class="firefox"] $ws2
 assign [class="Google-chrome" instance="google-chrome"] $ws2
 assign [class="Chromium"] $ws2
 assign [class="Brave-browser"] $ws2
+
 assign [class="Gedit"] $ws3
 assign [class="Code"] $ws3
 assign [class="Subl3"] $ws3
+
 assign [class="Pcmanfm"] $ws4
 assign [class="Thunar"] $ws4
 assign [class="dolphin"] $ws4
 assign [class="pcmanfm_pkexec"] $ws4
-assign [class="vlc"] $ws5
-assign [class="Spotify Free"] $ws5
-assign [class="Evolution"] $ws6
-assign [class="Telegram"] $ws6
-assign [class="Slack"] $ws6
-assign [class="discord"] $ws6
-assign [class="^rambox$"] $ws6
-assign [class="^whatsapp$"] $ws6
+
+assign [class="Evolution"] $ws5
+assign [class="Telegram"] $ws5
+assign [class="Slack"] $ws5
+assign [class="discord"] $ws5
+assign [class="^rambox$"] $ws5
+assign [class="^whatsapp$"] $ws5
+
+assign [class="vlc"] $ws6
+assign [class="Spotify Free"] $ws6
+
 # assign [class="Pale moon"] $ws2
 # assign [class="Skype"] $ws5
 
@@ -379,7 +384,8 @@ assign [class="URxvt"] $ws1
 
 # Autostart applications
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
-exec --no-startup-id nitrogen --restore; sleep 1; picom -b --log-file="/home/nemesis/.config/picom/picom.log"
+exec --no-startup-id feh --bg-scale "/home/nemesis/Pictures/Wallpapers/mustang 69 landscape 2.png"
+exec --no-startup-id picom -b
 #exec --no-startup-id manjaro-hello
 exec --no-startup-id nm-applet
 exec --no-startup-id xfce4-power-manager
@@ -387,13 +393,14 @@ exec --no-startup-id pamac-tray
 exec --no-startup-id clipit
 # exec --no-startup-id blueman-applet
 # exec_always --no-startup-id sbxkb
-exec --no-startup-id start_conky_maia
+#exec --no-startup-id start_conky_maia
 # exec --no-startup-id start_conky_green
 exec --no-startup-id xautolock -time 10 -locker blurlock
 exec_always --no-startup-id ff-theme-util
 exec_always --no-startup-id fix_xcursor
-exec --no-startup-id start_conky_maia
+# exec --no-startup-id start_conky_maia
 
+exec --no-startup-id bash ~/.config/polybar/launch.sh
 
 
 # USER APPLICATIONS TO START AT BOOT
@@ -413,7 +420,7 @@ bindsym $mod+F3 exec pcmanfm
 # bindsym $mod+F3 exec ranger
 bindsym $mod+Shift+F3 exec pcmanfm_pkexec
 bindsym $mod+F4 exec slack
-bindsym $mod+F5 exec spotify
+bindsym $mod+F5 exec telegram-desktop
 bindsym $mod+Shift+F5 exec tilix -e 'mocp'
 bindsym $mod+F6 exec discord
 bindsym $mod+F7 exec telegram-desktop
@@ -421,11 +428,6 @@ bindsym $mod+F7 exec telegram-desktop
 
 #not workspace related
 
-
-#conky
-bindsym $mod+c exec --no-startup-id conky-toggle
-bindsym control+$alt+Next exec --no-startup-id conky-rotate -n
-bindsym control+$alt+Prior exec --no-startup-id conky-rotate -p
 
 # terminal
 bindsym $mod+Return exec --no-startup-id tilix;focus
@@ -456,7 +458,7 @@ bindsym control+$alt+p exec --no-startup-id pamac-manager
 bindsym --release $mod+Escape exec xkill
 
 bindsym control+$mod+c exec --no-startup-id "pkill picom;  notify-send 'picom killed'"
-bindsym $mod+control+t exec --no-startup-id "picom -b --log-file="/home/nemesis/.config/picom/picom.log"; notify-send 'picom started'"
+bindsym $mod+control+t exec --no-startup-id "picom -b; notify-send 'picom started'"
 bindsym $mod+Shift+p --release exec "killall dunst; exec notify-send 'restart dunst'"
 
 #####################################################################################################################
@@ -583,8 +585,8 @@ popup_during_fullscreen smart
 ## sound-section - DO NOT EDIT if you wish to automatically upgrade Alsa -> Pulseaudio later! ##
 ################################################################################################
 
-#exec --no-startup-id volumeicon
-#bindsym $mod+Ctrl+m exec terminal -e 'alsamixer'
+####exec --no-startup-id volumeicon
+####bindsym $mod+Ctrl+m exec terminal -e 'alsamixer'
 exec --no-startup-id start-pulseaudio-x11
 exec --no-startup-id pa-applet
 bindsym $mod+Ctrl+m exec pavucontrol
@@ -707,41 +709,41 @@ bindsym $mod+9 exec --no-startup-id blurlock
 #####################################################################################################################
 
 # Start i3bar to display a workspace bar (plus the system information i3status if available)
-bar {
-        height 20
-        strip_workspace_numbers yes
-        font pango:Fira Code 9
-        i3bar_command i3bar
-	status_command i3status
-        status_command exec /home/nemesis/.config/i3status/net-speed.sh
-	position bottom
-
-## please set your primary output first. Example: 'xrandr --output eDP1 --primary'
-#	tray_output primary
-#	tray_output eDP1
-
-	bindsym button4 nop
-	bindsym button5 nop
-#   font xft:URWGothic-Book 11
-
-    colors {
-        background #020E1C
-        statusline #F9FAF9
-        separator  #454947
-
-        # colorclass           border  backgr. text
-        focused_workspace  #2d89c7 #2d89c7 #292F34
-        active_workspace   #595B5B #353836 #FDF6E3
-        inactive_workspace #595B5B #071327 #EEE8D5
-        binding_mode       #16a085 #C3D82C #292F34
-        urgent_workspace   #16a085 #C3D82C #292F34
-        }
-}
+#bar {
+#        height 20
+#        strip_workspace_numbers yes
+#        font pango:Fira Code 9
+#        i3bar_command i3bar
+#	status_command i3status
+#        status_command exec /home/nemesis/.config/i3status/net-speed.sh
+#	position bottom
+#
+### please set your primary output first. Example: 'xrandr --output eDP1 --primary'
+##	tray_output primary
+##	tray_output eDP1
+#
+#	bindsym button4 nop
+#	bindsym button5 nop
+##   font xft:URWGothic-Book 11
+#
+#    colors {
+#        background #020E1C
+#        statusline #F9FAF9
+#        separator  #454947
+#
+#        # colorclass           border  backgr. text
+#        focused_workspace  #2d89c7 #2d89c7 #292F34
+#        active_workspace   #595B5B #353836 #FDF6E3
+#        inactive_workspace #595B5B #071327 #EEE8D5
+#        binding_mode       #16a085 #C3D82C #292F34
+#        urgent_workspace   #16a085 #C3D82C #292F34
+#        }
+#}
 
 # hide/unhide i3status bar
 bindsym $mod+m bar mode toggle
 
-# Theme colors
+# Theme colors  
     # class                 border  backgr. text    indicator
     client.focused          #11325b #11325b #ffffff #FDF6E3 #11325b
     client.focused_inactive #071327 #071327 #ffffff #454948
@@ -756,7 +758,7 @@ bindsym $mod+m bar mode toggle
 #####################################################################################################################
 
 # Set inner/outer gaps
-gaps inner 14
+gaps inner 8
 gaps outer -2
 
 # Additionally, you can issue commands with the following syntax. This is useful to bind keys to changing the gap size.
@@ -769,7 +771,7 @@ smart_gaps inverse_outer
 
 # Smart borders (draw borders around container only if it is not the only container on this workspace) 
 # on|no_gaps (on=always activate and no_gaps=only activate if the gap size to the edge of the screen is 0)
-smart_borders on
+smart_borders no_gaps
 
 
 

@@ -1,4 +1,11 @@
 jorgebucaran/fisher
+jethrokuan/z
+PatrickF1/fzf.fish
+jorgebucaran/spark.fish
 cideM/fish-yvm
-jorgebucaran/nvm.fish
-reitzig/sdkman-for-fish@v1.4.0
+jorgebucaran/replay.fish
+joseluisq/gitnow@2.8.0
+jorgebucaran/autopair.fish
+evanlucas/fish-kubectl-completions
+brgmnn/fish-docker-compose
+franciscolourenco/done
