@@ -385,7 +385,7 @@ assign [class="URxvt"] $ws1
 # Autostart applications
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id feh --bg-scale "/home/nemesis/Pictures/Wallpapers/mustang 69 landscape 2.png"
-exec --no-startup-id picom -b
+exec --no-startup-id picom -b --log-file='/home/nemesis/.config/picom/picom.log'
 #exec --no-startup-id manjaro-hello
 exec --no-startup-id nm-applet
 exec --no-startup-id xfce4-power-manager
@@ -458,7 +458,7 @@ bindsym control+$alt+p exec --no-startup-id pamac-manager
 bindsym --release $mod+Escape exec xkill
 
 bindsym control+$mod+c exec --no-startup-id "pkill picom;  notify-send 'picom killed'"
-bindsym $mod+control+t exec --no-startup-id "picom -b; notify-send 'picom started'"
+bindsym $mod+control+t exec --no-startup-id "picom -b --log-file='/home/nemesis/.config/picom/picom.log'; notify-send 'picom started'"
 bindsym $mod+Shift+p --release exec "killall dunst; exec notify-send 'restart dunst'"
 
 #####################################################################################################################
