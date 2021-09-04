@@ -5,7 +5,7 @@ backup_dir="$PWD/dotfiles"
 config_folder="$HOME/.config"
 
 declare -a HOME_FILES=(".i3" ".Xresources" ".xinitrc" "ssh-add.sh" ".gitconfig" ".dmenurc" ".doom.d")
-declare -a CONFIG_FILES=("i3status" "dunst" "compton.conf" "picom.conf" "picom" "awesome" "nano" "polybar" "rofi" "tilix" "fish" )
+declare -a CONFIG_FILES=("i3status" "dunst" "picom" "nano" "polybar" "rofi" "tilix" "fish" )
 
 
 if [ -d $backup_dir ]
