@@ -65,10 +65,10 @@ set $right semicolon
 #exec --no-startup-id xrandr --output DVI-I-0 --right-of HDMI-0 --auto
 #exec --no-startup-id xrandr --output DVI-1 --right-of DVI-0 --auto
 #exec --no-startup-id xrandr --output DVI-D-1 --right-of DVI-I-1 --auto
-exec --no-startup-id xrandr --output HDMI2 --right-of HDMI1 --auto
+# exec --no-startup-id xrandr --output HDMI2 --right-of HDMI1 --auto
 
 # duplicate screen to monitor
-bindsym $mod+a exec --no-startup-id  xrandr --output HDMI-1-0 --primary --auto
+bindsym $mod+a exec --no-startup-id  xrandr --output HDMI-0 --primary --rate 60 --auto
 
 # my current setup
 
@@ -105,10 +105,10 @@ workspace 8 output $secondMonitor
 #####################################################################################################################
 
 # start dmenu
-bindsym $mod+d exec --no-startup-id "LC_CTYPE=en_GB.UTF-8 dmenu_run" 
+bindsym $mod+d exec --no-startup-id "LC_CTYPE=en_GB.UTF-8 dmenu_run -fn 'Droid Sans Mono-5'" 
 
 # start dmenu_recency
-bindsym $mod+Shift+d exec --no-startup-id "LC_CTYPE=en_GB.UTF-8 dmenu_recency"   
+bindsym $mod+Shift+d exec --no-startup-id "LC_CTYPE=en_GB.UTF-8 dmenu_recency -fn 'Droid Sans Mono-5"   
 
 
 #####################################################################################################################
@@ -329,7 +329,7 @@ assign [class="^rambox$"] $ws5
 assign [class="^whatsapp$"] $ws5
 
 assign [class="vlc"] $ws6
-assign [class="Spotify Free"] $ws6
+assign [class="Spotify"] $ws7
 
 # assign [class="Pale moon"] $ws2
 # assign [class="Skype"] $ws5
@@ -340,6 +340,7 @@ assign [class="Spotify Free"] $ws6
 #assign [class="Chromium|Google-chrome"]
 assign [class="X-terminal-emulator"] $ws1
 assign [class="Tilix"] $ws1
+assign [class="Alacritty"] $ws1
 assign [class="URxvt"] $ws1
 
 # Workspace 2 text editor related
@@ -385,22 +386,26 @@ assign [class="URxvt"] $ws1
 # Autostart applications
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id feh --bg-scale "/home/nemesis/Pictures/Wallpapers/mustang 69 landscape 2.png"
-exec --no-startup-id picom -b --log-file='/home/nemesis/.config/picom/picom.log'
-#exec --no-startup-id manjaro-hello
+
+#### Compositor
+#exec --no-startup-id picom -b --log-file='/home/nemesis/.config/picom/picom.log'
+exec --no-startup-id xcompmgr -c &
+
+
+
 exec --no-startup-id nm-applet
 exec --no-startup-id xfce4-power-manager
 exec --no-startup-id pamac-tray
 exec --no-startup-id clipit
-# exec --no-startup-id blueman-applet
+exec --no-startup-id blueman-applet
 # exec_always --no-startup-id sbxkb
 #exec --no-startup-id start_conky_maia
 # exec --no-startup-id start_conky_green
-exec --no-startup-id xautolock -time 10 -locker blurlock
-exec_always --no-startup-id ff-theme-util
-exec_always --no-startup-id fix_xcursor
+# exec --no-startup-id xautolock -time 10 -locker blurlock
+# exec_always --no-startup-id ff-theme-util
+# exec_always --no-startup-id fix_xcursor
 # exec --no-startup-id start_conky_maia
 
-exec --no-startup-id bash ~/.config/polybar/launch.sh
 
 
 # USER APPLICATIONS TO START AT BOOT
@@ -413,7 +418,7 @@ exec --no-startup-id bash ~/.config/polybar/launch.sh
 
 
 # Start Applications
-bindsym control+$mod+b exec tilix -e 'bmenu'
+bindsym control+$mod+b exec alacritty -e 'bmenu'
 bindsym $mod+F1 exec evolution
 bindsym $mod+F2 exec google-chrome-stable
 bindsym $mod+F3 exec pcmanfm
@@ -421,20 +426,20 @@ bindsym $mod+F3 exec pcmanfm
 bindsym $mod+Shift+F3 exec pcmanfm_pkexec
 bindsym $mod+F4 exec slack
 bindsym $mod+F5 exec telegram-desktop
-bindsym $mod+Shift+F5 exec tilix -e 'mocp'
+bindsym $mod+Shift+F5 exec alacritty -e 'mocp'
 bindsym $mod+F6 exec discord
-bindsym $mod+F7 exec telegram-desktop
+bindsym $mod+F7 exec LD_PRELOAD=/usr/local/lib/spotify-adblock.so spotify
 
 
 #not workspace related
 
 
 # terminal
-bindsym $mod+Return exec --no-startup-id tilix;focus
-bindsym $mod+KP_Enter exec --no-startup-id tilix;focus
+bindsym $mod+Return exec --no-startup-id alacritty;focus
+bindsym $mod+KP_Enter exec --no-startup-id alacritty;focus
 bindsym control+$alt+t exec --no-startup-id terminal; focus
-bindsym control+$alt+Return exec --no-startup-id tilix; focus
-bindsym control+$alt+KP_Enter exec --no-startup-id tilix; focus
+bindsym control+$alt+Return exec --no-startup-id alacritty; focus
+bindsym control+$alt+KP_Enter exec --no-startup-id alacritty; focus
 bindsym F12 exec --no-startup-id xfce4-terminal --drop-down; focus
 
 #System monitor
@@ -445,7 +450,7 @@ bindsym control+Shift+Escape exec --no-startup-id xfce4-taskmanager;focus
 #bindsym control+$alt+c exec --no-startup-id catfish;focus
 
 #htop
-bindsym $alt+h exec --no-startup-id htop;focus
+bindsym $alt+h exec --no-startup-id alacritty -e 'htop';focus
 
 # start xfce-appfinder
 #arcolinux does not seem to work
@@ -457,8 +462,8 @@ bindsym control+$alt+p exec --no-startup-id pamac-manager
 #xkill
 bindsym --release $mod+Escape exec xkill
 
-bindsym control+$mod+c exec --no-startup-id "pkill picom;  notify-send 'picom killed'"
-bindsym $mod+control+t exec --no-startup-id "picom -b --log-file='/home/nemesis/.config/picom/picom.log'; notify-send 'picom started'"
+#bindsym control+$mod+c exec --no-startup-id "pkill picom;  notify-send 'picom killed'"
+#bindsym $mod+control+t exec --no-startup-id "picom -b --log-file='/home/nemesis/.config/picom/picom.log'; notify-send 'picom started'"
 bindsym $mod+Shift+p --release exec "killall dunst; exec notify-send 'restart dunst'"
 
 #####################################################################################################################
@@ -537,12 +542,16 @@ for_window [class="Terminator"] focus
 
 
 #####################################################################################################################
-#################                          bar toggle                                               #################
+#################                          bar                                                      #################
 #####################################################################################################################
 
+exec --no-startup-id bash ~/.config/polybar/launch.sh
 
 # bar toggle, hide or show
-bindsym $mod+b bar mode toggle
+#bindsym $mod+b bar mode toggle
+bindsym $mod+b exec --no-startup-id polybar-msg cmd hide
+bindsym $mod+n exec --no-startup-id polybar-msg cmd show
+bindsym $mod+m exec --no-startup-id bash ~/.config/polybar/launch.sh
 
 
 #####################################################################################################################
@@ -585,8 +594,8 @@ popup_during_fullscreen smart
 ## sound-section - DO NOT EDIT if you wish to automatically upgrade Alsa -> Pulseaudio later! ##
 ################################################################################################
 
-####exec --no-startup-id volumeicon
-####bindsym $mod+Ctrl+m exec terminal -e 'alsamixer'
+#####exec --no-startup-id volumeicon
+#####bindsym $mod+Ctrl+m exec terminal -e 'alsamixer'
 exec --no-startup-id start-pulseaudio-x11
 exec --no-startup-id pa-applet
 bindsym $mod+Ctrl+m exec pavucontrol
@@ -740,8 +749,6 @@ bindsym $mod+9 exec --no-startup-id blurlock
 #        }
 #}
 
-# hide/unhide i3status bar
-bindsym $mod+m bar mode toggle
 
 # Theme colors  
     # class                 border  backgr. text    indicator
@@ -758,8 +765,8 @@ bindsym $mod+m bar mode toggle
 #####################################################################################################################
 
 # Set inner/outer gaps
-gaps inner 8
-gaps outer -2
+gaps inner 6
+gaps outer 0
 
 # Additionally, you can issue commands with the following syntax. This is useful to bind keys to changing the gap size.
 # gaps inner|outer current|all set|plus|minus <px>

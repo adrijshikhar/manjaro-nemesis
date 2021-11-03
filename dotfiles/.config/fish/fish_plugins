@@ -1,11 +1,8 @@
 jorgebucaran/fisher
-jethrokuan/z
-PatrickF1/fzf.fish
-jorgebucaran/spark.fish
-cideM/fish-yvm
-jorgebucaran/replay.fish
 joseluisq/gitnow@2.8.0
 jorgebucaran/autopair.fish
-evanlucas/fish-kubectl-completions
-brgmnn/fish-docker-compose
 franciscolourenco/done
+brgmnn/fish-docker-compose
+evanlucas/fish-kubectl-completions
+jorgebucaran/nvm.fish
+cideM/fish-yvm
