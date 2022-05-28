@@ -105,10 +105,10 @@ workspace 8 output $secondMonitor
 #####################################################################################################################
 
 # start dmenu
-bindsym $mod+d exec --no-startup-id "LC_CTYPE=en_GB.UTF-8 dmenu_run -fn 'Droid Sans Mono-5'" 
+bindsym $mod+d exec --no-startup-id "LC_CTYPE=en_GB.UTF-8 dmenu_run -fn 'Droid Sans Mono-11'" 
 
 # start dmenu_recency
-bindsym $mod+Shift+d exec --no-startup-id "LC_CTYPE=en_GB.UTF-8 dmenu_recency -fn 'Droid Sans Mono-5"   
+bindsym $mod+Shift+d exec --no-startup-id "LC_CTYPE=en_GB.UTF-8 dmenu_recency -fn 'Droid Sans Mono-11'"   
 
 
 #####################################################################################################################
@@ -383,7 +383,7 @@ assign [class="URxvt"] $ws1
 #####################################################################################################################
 
 
-# Autostart applications
+# Autostart applications`
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id feh --bg-scale "/home/nemesis/Pictures/Wallpapers/mustang 69 landscape 2.png"
 

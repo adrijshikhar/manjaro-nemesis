@@ -1,8 +1,8 @@
 jorgebucaran/fisher
 joseluisq/gitnow@2.8.0
 jorgebucaran/autopair.fish
-franciscolourenco/done
 brgmnn/fish-docker-compose
 evanlucas/fish-kubectl-completions
-jorgebucaran/nvm.fish
 cideM/fish-yvm
+franciscolourenco/done
+jduchateau/fish-flutter-completions
